@@ -25,7 +25,7 @@ input_file = 'input.h5'
 
 if not os.path.exists(out_directory + output_file):
     fout = h5py.File(out_directory + output_file, 'w')
-    dset_out = fout.create_dataset("output", data=random_input, chunks=True, maxshape=((None,)))
+    dset_out = fout.create_dataset("output", data=random_input, maxshape=(None,))
 
 else:
     fout = h5py.File(out_directory + output_file, 'a')
@@ -35,7 +35,7 @@ else:
 
 if not os.path.exists(out_directory + input_file):
     fin = h5py.File(out_directory + input_file, 'w')
-    dset_in = fin.create_dataset("input", data=X_gasf[0], chunks=True, maxshape=((None,)))
+    dset_in = fin.create_dataset("input", data=X_gasf[0], maxshape=(None,))
 
 else:
     fin = h5py.File(out_directory + input_file, 'a')
