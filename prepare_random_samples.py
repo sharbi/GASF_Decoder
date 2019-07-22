@@ -5,7 +5,7 @@ from mpl_toolkits.axes_grid1 import ImageGrid
 import pickle as pkl
 
 print("generating random input")
-random_input = np.random.randint(1, 300, (100 ,4, 60))
+random_input = np.random.randint(1, 300, (1000000 ,4, 60))
 print("Input generated")
 
 
