@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
 from mpl_toolkits.axes_grid1 import ImageGrid
 import h5py
+import os
 
 print("generating random input")
 random_input = np.random.randint(1, 300, (1000 ,4, 60))
