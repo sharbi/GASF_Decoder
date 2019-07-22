@@ -35,7 +35,7 @@ else:
 
 if not os.path.exists(out_directory + input_file):
     fin = h5py.File(out_directory + input_file, 'w')
-    dset_in = fin.create_dataset("input", data=X_gasf[0], chunks=True, maxshape=(None, 4, 32, 32))
+    dset_in = fin.create_dataset("input", data=X_gasf, chunks=True, maxshape=(None, 4, 32, 32))
 
 else:
     fin = h5py.File(out_directory + input_file, 'a')
