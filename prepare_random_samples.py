@@ -1,9 +1,9 @@
 import numpy as np
-from pyts.image import GramianAngularField
 import matplotlib.pyplot as plt
+from pyts.image import GramianAngularField
 from mpl_toolkits.axes_grid1 import ImageGrid
 
-random_input = np.random.randint(1, 300, (1000000 ,4, 60))
+random_input = np.random.randint(1, 300, (100000 ,4, 60))
 
 image_size = 32
 gasf = GramianAngularField(image_size, method='summation')
