@@ -14,7 +14,7 @@ print("Performing GASF on input")
 gasf = GramianAngularField(image_size, method='summation')
 X_gasf = np.array((1000000, 4, 32, 32))
 for i, x in enumerate(random_input):
-    X_gasf[i] = gasf(x)
+    X_gasf[i] = gasf.fit_transform(x)
 
 print("Finished GASF")
 
