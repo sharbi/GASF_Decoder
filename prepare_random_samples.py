@@ -25,5 +25,5 @@ input_file = 'input.h5py'
 fout = h5py.File(out_directory + output_file, 'a')
 fin = h5py.File(out_directory + input_file, 'a')
 
-dset_out = fout.create_dataset("output", data=random_input, maxshape=(None, 4, 60))
-dset_in = fin.create_dataset("input", data=X_gasf[0], maxshape=(None, 4, 32, 32))
+dset_out = fout.create_dataset("output", data=random_input, maxshape=(None,))
+dset_in = fin.create_dataset("input", data=X_gasf[0], maxshape=(None,))
