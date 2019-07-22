@@ -12,7 +12,10 @@ print("Input generated")
 image_size = 32
 print("Performing GASF on input")
 gasf = GramianAngularField(image_size, method='summation')
-X_gasf = [gasf.fit_transform(x) for x in random_input]
+X_gasf = np.array(1000000, 4, 32, 32)
+for i, x in enumerate(random_input):
+    X_gasf[i] = gasf(x)
+
 print("Finished GASF")
 
 pkl.dump(random_input, open('./data/output_1.pkl', 'wb'))
