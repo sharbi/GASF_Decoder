@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
 from mpl_toolkits.axes_grid1 import ImageGrid
-import pickle as pkl
+import h5py
 
 print("generating random input")
-random_input = np.random.randint(1, 300, (1000000 ,4, 60))
+random_input = np.random.randint(1, 300, (1000 ,4, 60))
 print("Input generated")
 
 
@@ -18,5 +18,12 @@ print(X_gasf.shape)
 
 print("Finished GASF")
 
-np.save('./data/output.npy', random_input)
-np.save('./data/input_1.pkl', X_gasf[0])
+out_directory = './data/'
+output_file = 'output.h5py'
+input_file = 'input.h5py'
+
+fout = h5py.File(out_directory + output_file, 'a')
+fin = h5py.File(out_directory + input_file, 'a')
+
+dset_out = fout.create_dataset("output", data=random_input, maxshape=(None, 4, 60))
+dset_in = fin.create_dataset("input", data=X_gasf[0], maxshape=(None, 4, 32, 32))
