@@ -20,8 +20,8 @@ print(X_gasf.shape)
 print("Finished GASF")
 
 out_directory = './data/'
-output_file = 'output.h5py'
-input_file = 'input.h5py'
+output_file = 'output.h5'
+input_file = 'input.h5'
 
 if not os.path.exists(out_directory + output_file):
     fout = h5py.File(out_directory + output_file, 'w')
