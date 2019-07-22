@@ -33,7 +33,7 @@ else:
     fout['output'][-random_input.shape[0]:] = random_input
 
 
-if os.path.exists(out_directory + input_file):
+if not os.path.exists(out_directory + input_file):
     fin = h5py.File(out_directory + input_file, 'w')
     dset_in = fin.create_dataset("input", data=X_gasf[0], maxshape=(None, 4, 32, 32))
 
