@@ -22,11 +22,26 @@ out_directory = './data/'
 output_file = 'output.h5py'
 input_file = 'input.h5py'
 
-fout = h5py.File(out_directory + output_file, 'a')
-fin = h5py.File(out_directory + input_file, 'a')
+if not os.path.exists(out_directory + output_file):
+    fout = h5py.File(out_directory + output_file, 'w')
+    dset_out = fout.create_dataset("output", data=random_input)
 
-dset_out = fout.create_dataset("output", data=random_input)
-dset_in = fin.create_dataset("input", data=X_gasf[0])
+else:
+    fout = h5py.File(out_directory + output_file, 'a')
+    fout['output'].resize((fout['output'].shape[0] + random_input.shape[0]), axis=0)
+    fout['output'][-random_input.shape[0]:] = random_input
+
+
+if os.path.exists(out_directory + input_file):
+    fin = h5py.File(out_directory + input_file, 'w')
+    dset_in = fin.create_dataset("input", data=X_gasf[0])
+
+else:
+    fin = h5py.File(out_directory + input_file, 'a')
+    fin['input'].resize((fin['input'].shape[0] + X_gasf[0].shape[0]), axis=0)
+    fin['input'][-X_gasf[0].shape[0]:] = X_gasf[0]
+
+
 
 fout.close()
 fin.close()
