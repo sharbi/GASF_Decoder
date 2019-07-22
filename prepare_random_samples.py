@@ -27,3 +27,6 @@ fin = h5py.File(out_directory + input_file, 'a')
 
 dset_out = fout.create_dataset("output", data=random_input)
 dset_in = fin.create_dataset("input", data=X_gasf[0])
+
+fout.close()
+fin.close()
