@@ -111,8 +111,8 @@ if __name__ == '__main__':
     X_train = X_input[:training_size]
     X_test = X_input[training_size:]
 
-    y_train = y_input[:training_size]
-    y_test = y_input[training_size:]
+    y_train = y[:training_size]
+    y_test = y[training_size:]
 
     num_train, num_test = X_train.shape[0], X_test.shape[0]
 
