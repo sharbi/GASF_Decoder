@@ -67,7 +67,7 @@ def build_decoder(input_shape):
     dense1 = Dense(240, activation='linear', name='decode')(features)
     output = Reshape((4, 60))(dense1)
 
-    return output
+    return Model(gasf_input, output)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     decoder = build_decoder(input_shape=(4, 32, 32))
 
-    decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1), loss='meab_squared_error')
+    decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1), loss='mean_squared_error')
 
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
