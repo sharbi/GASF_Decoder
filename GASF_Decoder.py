@@ -61,7 +61,7 @@ def build_decoder(input_shape):
     decoder.add(Dropout(0.3))
     decoder.add(Dense(1024, activation='relu'))
 
-    gasf_input = Input(4, 32, 32)
+    gasf_input = Input(shape=(4, 32, 32))
     features = decoder(gasf_input)
 
     output = Dense((4, 60), activation='linear', name='decode')(features)
