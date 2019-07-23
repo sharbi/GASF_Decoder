@@ -13,6 +13,7 @@ from keras.optimizers import Adam, SGD, RMSprop
 from keras.utils.generic_utils import Progbar
 import numpy as np
 import os
+import rn
 import argparse
 import time
 import math
