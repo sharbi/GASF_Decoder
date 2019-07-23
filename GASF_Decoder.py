@@ -75,7 +75,7 @@ if __name__ == '__main__':
     parser.add_argument("--clip_value", type=float, default=0)
     parser.add_argument("--epochs", type=int, default=200)
     parser.add_argument("--lr", type=float, default=0.00002)
-    parser.add_argument("--batch_size", type=int, default=64)
+    parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--prefix", default='')
     parser.add_argument("--seed", type=int, default="123")
     args = parser.parse_args()
@@ -95,7 +95,8 @@ if __name__ == '__main__':
 
     decoder = build_decoder(input_shape=(4, 32, 32))
 
-    decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1), loss='mean_squared_error')
+    decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
+                    loss='mean_squared_error', metrics=['accuracy'])
 
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
@@ -116,8 +117,7 @@ if __name__ == '__main__':
 
     num_train, num_test = X_train.shape[0], X_test.shape[0]
 
-    train_history = defaultdict(list)
-    test_history = defaultdict(list)
+
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
@@ -125,38 +125,16 @@ if __name__ == '__main__':
     # Set session details and placeholders for privacy accountant
     sess = K.get_session()
 
-    for epoch in range(epochs):
-        print('Epoch {} of {}'.format(epoch, epochs))
+    num_batches = num_train // batch_size
 
-        num_batches = num_train // batch_size
-        progress_bar = Progbar(target=num_batches)
+    decoder.fit(X_train, y_train,
+                batch_size=batch_size,
+                epochs=epochs,
+                verbose=1,
+                validation_data=(X_test, y_test))
 
-        epoch_decoder_loss = []
+    score = decoder.evaluate(X_test, y_test, verbose=0)
+    print("Test loss:", score[0])
+    print("Test accuracy", score[1])
 
-        # print(gamma)
-
-        train_start_time = time.clock()
-        for index in range(num_batches):
-            progress_bar.update(index)
-
-        epoch_decoder_loss.append(decoder.train_on_batch(X_train, y_train))
-
-        print('\n Train time: ', time.clock() - train_start_time)
-
-        decoder_test_loss = decoder.evaluate(X_test, y_test, verbose=False)
-
-        decoder_train_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
-
-        train_history['decoder'].append(decoder_train_loss)
-
-        test_history['decoder'].append(decoder_test_loss)
-
-        print('{0:<22s} | {1:4s}'.format(
-            'component', *decoder.metrics_names))
-        print('-' * 65)
-
-        ROW_FMT = '{0:<22s} | {1:<4.2f}'
-        print(ROW_FMT.format('decoder (train)',
-                             *train_history['decoder'][-1]))
-        print(ROW_FMT.format('decoder (test)',
-                             *test_history['decoder'][-1]))
+    
