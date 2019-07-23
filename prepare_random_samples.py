@@ -51,4 +51,4 @@ def generate_samples(n):
         fin.close()
 
 if __name__ == '__main__':
-    generate_samples(1000)
+    generate_samples(300)
