@@ -93,7 +93,7 @@ if __name__ == '__main__':
     decoder = build_decoder(input_shape=(4, 32, 32))
 
     decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
-                    loss='mean_squared_error', metrics=['accuracy'])
+                    loss='categorical_crossentropy', metrics=['accuracy'])
 
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
