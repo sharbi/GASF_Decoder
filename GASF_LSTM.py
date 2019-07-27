@@ -1,6 +1,7 @@
 import tensorflow as tf
 import keras.backend as K
 from keras.layers import Input, Dense, LSTM, Reshape, TimeDistributed
+from keras.models import Sequential
 import numpy as np
 import math
 import h5py
