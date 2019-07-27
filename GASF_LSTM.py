@@ -2,6 +2,7 @@ import tensorflow as tf
 import keras.backend as K
 from keras.layers import Input, Dense, LSTM, Reshape, TimeDistributed
 import numpy as np
+import math
 import h5py
 
 if __name__ == '__main__':
