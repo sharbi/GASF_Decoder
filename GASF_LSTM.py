@@ -20,7 +20,7 @@ if __name__ == '__main__':
     fout = h5py.File('./data/output.h5', 'r')
 
     X_input = np.array(list(fin['input']))
-    X_input = X_input.flatten()
+    X_input = X_input.reshape(X_input.shape[0], 4, 1024)
     y = np.array(list(fout['output']))
 
     fin.close()
