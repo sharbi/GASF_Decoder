@@ -45,7 +45,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(60)))
 
-    decoder.compile(optimizer='rmsprop', loss='mean_squared_error', metrics='accuracy')
+    decoder.compile(optimizer='rmsprop', loss='mean_squared_error', metrics=['accuracy'])
 
     decoder.fit(X_train, y_train,
                 batch_size=batch_size,
