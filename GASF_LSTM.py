@@ -1,6 +1,6 @@
 import tensorflow as tf
 import keras.backend as K
-from keras.layers import Input, Dense, LSTM, Reshape, TimeDistributed
+from keras.layers import Input, Dense, LSTM, Reshape, TimeDistributed, RepeatVector
 from keras.models import Sequential
 import numpy as np
 import math
@@ -42,7 +42,8 @@ if __name__ == '__main__':
     num_batches = num_train // batch_size
 
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
+    decoder.add(LSTM(latent_dim, input_shape=(4, 1024)))
+    decoder.add(RepeatVector(4))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(60)))
 
