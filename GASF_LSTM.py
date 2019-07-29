@@ -16,6 +16,16 @@ if __name__ == '__main__':
     output_shape = (4, 60)
     latent_dim = 256
 
+    # define the model
+    decoder = Sequential()
+    decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
+    decoder.add(LSTM(latent_dim))
+    decoder.add(Dense(240))
+    decoder.add(Reshape((4, 60)))
+
+    decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
+
+    # Load the data
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
 
@@ -41,13 +51,7 @@ if __name__ == '__main__':
 
     num_batches = num_train // batch_size
 
-    decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
-    decoder.add(LSTM(latent_dim))
-    decoder.add(Dense(240))
-    decoder.add(Reshape((4, 60)))
 
-    decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
     epoch_decoder_loss = []
 
     num_batches = X_input.shape[0] // batch_size
