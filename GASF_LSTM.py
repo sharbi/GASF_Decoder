@@ -64,6 +64,7 @@ if __name__ == '__main__':
             output_batch = y_train[(epoch-1 * batch_size):(epoch*batch_size)]
             epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
             output = decoder.predict(input_batch)
+            print(output)
 
 
         decoder_train_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
