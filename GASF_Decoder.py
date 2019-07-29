@@ -114,21 +114,32 @@ if __name__ == '__main__':
 
     num_train, num_test = X_train.shape[0], X_test.shape[0]
 
+    epoch_decoder_loss = []
 
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
 
-    # Set session details and placeholders for privacy accountant
-    sess = K.get_session()
 
     num_batches = num_train // batch_size
 
-    decoder.fit(X_train, y_train,
-                batch_size=batch_size,
-                epochs=epochs,
-                verbose=1,
-                validation_data=(X_test, y_test))
+    for epoch in range(epochs):
+        for i in range(num_batches):
+            input_batch = X_train[i * batch_size: i+1 * batch_size]
+            output_batch = y_train[i * batch_size: i+1 * batch_size]
+            epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
+            output = decoder
+            print(output)
+        decoder_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
+
+        print("Train loss"):
+        print(decoder_loss)
+
+    #decoder.fit(X_train, y_train,
+    #            batch_size=batch_size,
+    #            epochs=epochs,
+    #            verbose=1,
+    #            validation_data=(X_test, y_test))
 
     score = decoder.evaluate(X_test, y_test, verbose=0)
     print("Test loss:", score[0])
