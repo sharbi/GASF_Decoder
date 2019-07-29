@@ -45,7 +45,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(Dense(240))
-    decoder.add(Reshape(4, 60))
+    decoder.add(Reshape((4, 60)))
 
     decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
     epoch_decoder_loss = []
