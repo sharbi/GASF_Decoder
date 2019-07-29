@@ -132,7 +132,7 @@ if __name__ == '__main__':
             print(output)
         decoder_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
 
-        print("Train loss"):
+        print("Train loss:")
         print(decoder_loss)
 
     #decoder.fit(X_train, y_train,
