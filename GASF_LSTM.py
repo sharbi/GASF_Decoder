@@ -19,9 +19,8 @@ if __name__ == '__main__':
     # define the model
     decoder = Sequential()
     decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
-    decoder.add(LSTM(latent_dim))
-    decoder.add(Dense(240))
-    decoder.add(Reshape((4, 60)))
+    decoder.add(LSTM(latent_dimm return_sequences=True))
+    decoder.add(TimeDistributed(Dense(60)))
 
     decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
 
