@@ -125,8 +125,8 @@ if __name__ == '__main__':
 
     for epoch in range(epochs):
         for i in range(num_batches):
-            input_batch = X_train[i * batch_size: i+1 * batch_size]
-            output_batch = y_train[i * batch_size: i+1 * batch_size]
+            input_batch = X_train[i * batch_size: (i+1) * batch_size]
+            output_batch = y_train[i * batch_size: (i+1) * batch_size]
             epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
             output = decoder.predict(input_batch)
             print(output)
