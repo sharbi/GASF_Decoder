@@ -47,13 +47,32 @@ if __name__ == '__main__':
     decoder.add(TimeDistributed(Dense(60)))
 
     decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
+    epoch_decoder_loss = []
 
-    decoder.fit(X_train, y_train,
-                batch_size=batch_size,
-                epochs=epochs,
-                verbose=1,
-                validation_data=(X_test, y_test))
+    num_batches = X_input.shape[0] // batch_size
 
-    score = decoder.evaluate(X_test, y_test, verbose=0)
-    print("Test loss:", score[0])
-    print("Test accuracy", score[1])
+    for epoch in range(epochs):
+
+        for i in range(num_batches):
+
+            input_batch = X_train[(epoch-1 * batch_size):(epoch*batch_size)]
+            output_batch = y_train[(epoch-1 * batch_size):(epoch*batch_size)]
+            epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
+            output = decoder.predict(input_batch)
+
+
+        decoder_train_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
+
+        print("Train loss:")
+        print(decoder_train_loss)
+
+
+    #decoder.fit(X_train, y_train,
+    #            batch_size=batch_size,
+    #            epochs=epochs,
+    #            verbose=1,
+    #            validation_data=(X_test, y_test))
+
+        score = decoder.evaluate(X_test, y_test, verbose=0)
+        print("Test loss:", score[0])
+        print("Test accuracy", score[1])
