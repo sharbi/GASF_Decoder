@@ -42,12 +42,11 @@ if __name__ == '__main__':
     num_batches = num_train // batch_size
 
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(4, 1024)))
-    decoder.add(RepeatVector(4))
+    decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(60)))
 
-    decoder.compile(optimizer='rmsprop', loss='mean_squared_error', metrics=['accuracy'])
+    decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
 
     decoder.fit(X_train, y_train,
                 batch_size=batch_size,
