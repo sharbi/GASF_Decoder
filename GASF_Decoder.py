@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument("--noise", type=float, default=0.1)
     parser.add_argument("--clip_value", type=float, default=0)
     parser.add_argument("--epochs", type=int, default=200)
-    parser.add_argument("--lr", type=float, default=0.00002)
+    parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--prefix", default='')
     parser.add_argument("--seed", type=int, default="123")
