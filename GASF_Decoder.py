@@ -93,7 +93,7 @@ if __name__ == '__main__':
     decoder = build_decoder(input_shape=(4, 32, 32))
 
     decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
-                    loss='categorical_crossentropy', metrics=['accuracy'])
+                    loss='mse', metrics=['accuracy'])
 
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
@@ -123,23 +123,23 @@ if __name__ == '__main__':
 
     num_batches = num_train // batch_size
 
-    for epoch in range(epochs):
-        for i in range(num_batches):
-            input_batch = X_train[i * batch_size: (i+1) * batch_size]
-            output_batch = y_train[i * batch_size: (i+1) * batch_size]
-            epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
-            output = decoder.predict(input_batch)
-            print(output)
-        decoder_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
+    #for epoch in range(epochs):
+    #    for i in range(num_batches):
+    #        input_batch = X_train[i * batch_size: (i+1) * batch_size]
+    #        output_batch = y_train[i * batch_size: (i+1) * batch_size]
+    #        epoch_decoder_loss.append(decoder.train_on_batch(input_batch, output_batch))
+    #        output = decoder.predict(input_batch)
+    #        print(output)
+    #    decoder_loss = np.mean(np.array(epoch_decoder_loss), axis=0)
 
-        print("Train loss:")
-        print(decoder_loss)
+    #    print("Train loss:")
+    #    print(decoder_loss)
 
-    #decoder.fit(X_train, y_train,
-    #            batch_size=batch_size,
-    #            epochs=epochs,
-    #            verbose=1,
-    #            validation_data=(X_test, y_test))
+    decoder.fit(X_train, y_train,
+                batch_size=batch_size,
+                epochs=epochs,
+                verbose=1,
+                validation_data=(X_test, y_test))
 
     score = decoder.evaluate(X_test, y_test, verbose=0)
     print("Test loss:", score[0])
