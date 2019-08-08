@@ -17,12 +17,9 @@ if __name__ == '__main__':
     output_shape = (4, 60)
     latent_dim = 256
 
-
-
     # define the model
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(4, 1024)))
-    decoder.add(RepeatVector(4))
+    decoder.add(LSTM(latent_dim, input_shape=(4, 1024), return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(60)))
 
