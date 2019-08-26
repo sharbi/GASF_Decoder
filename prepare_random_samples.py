@@ -9,7 +9,7 @@ import os
 def generate_samples(n):
     for _ in range(n):
         print("generating random input")
-        random_input = np.random.randint(1, 300, (1000 ,4, 60))
+        random_input = np.random.randint(1, 300, (4000 ,1, 60))
         print("Input generated")
 
 
@@ -28,7 +28,7 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + output_file):
             fout = h5py.File(out_directory + output_file, 'w')
-            dset_out = fout.create_dataset("output", data=random_input, chunks=True, maxshape=(None, 4, 60))
+            dset_out = fout.create_dataset("output", data=random_input, chunks=True, maxshape=(None, 1, 60))
 
         else:
             fout = h5py.File(out_directory + output_file, 'a')
@@ -38,7 +38,7 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + input_file):
             fin = h5py.File(out_directory + input_file, 'w')
-            dset_in = fin.create_dataset("input", data=X_gasf, chunks=True, maxshape=(None, 4, 32, 32))
+            dset_in = fin.create_dataset("input", data=X_gasf, chunks=True, maxshape=(None, 1, 32, 32))
 
         else:
             fin = h5py.File(out_directory + input_file, 'a')
