@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
 import h5py
 import os
