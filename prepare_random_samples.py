@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
-from mpl_toolkits.axes_grid1 import ImageGrid
 import h5py
 import os
 
