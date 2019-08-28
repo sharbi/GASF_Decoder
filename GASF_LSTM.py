@@ -46,11 +46,11 @@ if __name__ == '__main__':
     # define the model
     decoder = Sequential()
     decoder.add(LSTM(latent_dim, input_shape=(batch_size, 1, n_in), stateful=True))
-    decoder.add(RepeatVector(n_in))
+    decoder.add(RepeatVector(n_out))
     decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
     decoder.add(TimeDistributed(Dense(60)))
 
-    decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
 
     # Load the data
     fin = h5py.File('./data/input.h5','r')
