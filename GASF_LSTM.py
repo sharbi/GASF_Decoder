@@ -46,7 +46,7 @@ if __name__ == '__main__':
     # define the model
     decoder = Sequential()
     decoder.add(LSTM(latent_dim, batch_input_shape=(batch_size, 1, n_in), stateful=True))
-    decoder.add(RepeatVector(n_out))
+    decoder.add(RepeatVector(1))
     decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
     decoder.add(TimeDistributed(Dense(60)))
 
