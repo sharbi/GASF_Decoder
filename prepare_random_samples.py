@@ -7,7 +7,7 @@ import os
 def generate_samples(n):
     for _ in range(n):
         print("generating random input")
-        random_input = np.random.randint(1, 300, (250 ,1, 60))
+        random_input = np.random.randint(1, 300, (1000 ,1, 60))
         print("Input generated")
 
 
