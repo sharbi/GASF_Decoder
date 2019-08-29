@@ -88,6 +88,6 @@ if __name__ == '__main__':
                 verbose=1,
                 validation_data=(X_test, y_test))
 
-        score = decoder.evaluate(X_test, y_test, verbose=0)
-        print("Test loss:", score[0])
-        print("Test accuracy", score[1])
+    score = decoder.evaluate(X_test, y_test, verbose=0)
+    print("Test loss:", score[0])
+    print("Test accuracy", score[1])
