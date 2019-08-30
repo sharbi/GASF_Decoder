@@ -58,11 +58,11 @@ def build_decoder(input_shape):
 
     decoder.add(Dense(1024, activation='relu'))
 
-    gasf_input = Input(shape=(4, 32, 32))
+    gasf_input = Input(shape=(1, 32, 32))
     features = decoder(gasf_input)
 
     dense1 = Dense(240, activation='linear', name='decode')(features)
-    output = Reshape((4, 60))(dense1)
+    output = Reshape((1, 60))(dense1)
 
     return Model(gasf_input, output)
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     adam_lr = args.lr
     adam_beta_1 = 0.5
 
-    decoder = build_decoder(input_shape=(4, 32, 32))
+    decoder = build_decoder(input_shape=(1, 32, 32))
 
     decoder.compile(optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
                     loss='mse', metrics=['accuracy'])
