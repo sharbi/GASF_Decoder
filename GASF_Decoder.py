@@ -61,8 +61,7 @@ def build_decoder(input_shape):
     gasf_input = Input(shape=(1, 32, 32))
     features = decoder(gasf_input)
 
-    dense1 = Dense(240, activation='linear', name='decode')(features)
-    output = Reshape((1, 60))(dense1)
+    output = Dense(60, activation='linear', name='decode')(features)
 
     return Model(gasf_input, output)
 
