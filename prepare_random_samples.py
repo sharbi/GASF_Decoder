@@ -41,7 +41,7 @@ def generate_samples(n):
         else:
             fin = h5py.File(out_directory + input_file, 'a')
             fin['input'].resize((fin['input'].shape[0] + X_gasf.shape[0]), axis=0)
-            fin['input'][-X_gasf[0].shape[0]:] = X_gasf[0]
+            fin['input'][-X_gasf.shape[0]:] = X_gasf
 
 
 
