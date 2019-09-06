@@ -7,6 +7,8 @@ import pandas as pd
 import math
 import h5py
 from functools import partial
+from keras.utils.generic_utils import Progbar
+
 
 
 def string_to_length(max_len, strin):
@@ -21,7 +23,16 @@ def convert_to_string(X, y, largest_in, largest_out):
     Xstr = [string_to_length(largest_in, number) for x in X for input in x for number in input]
     print("Example output:")
     print(Xstr[0])
-    Ystr = [string_to_length(largest_out, number) for ys in y for input in y for number in input]
+    Ystr = list()
+    for i, set in enumerate(y):
+        progress_bar = Progbar(target=len(y))
+        for values in set:
+            patterns = list()
+            for value in values:
+                patterns.append(string_to_length(largest_out, value))
+            Ystr.append(patterns)
+        progress_bar.update(i + 1)
+
 
     return Xstr, Ystr
 
