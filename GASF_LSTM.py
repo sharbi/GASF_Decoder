@@ -9,10 +9,10 @@ import h5py
 from functools import partial
 
 
-def string_to_length(len, strin):
+def string_to_length(max_len, strin):
     strin = str(strin)
-    if len(strin) < len:
-        strout = ''.join([' ' for _ in range(len - len(strin))]) + strin
+    if len(strin) < max_len:
+        strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
