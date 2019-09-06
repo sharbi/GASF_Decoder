@@ -15,8 +15,11 @@ def string_to_length(len, strin):
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
-    Xstr = [list(map(partial(string_to_length(largest_in)), map(str, input))) for x in X for input in x]
-    Ystr = [list(map(partial(string_to_length(largest_out)), map(str, input))) for ys in y for input in y]
+    Xstr = [list(map(str, input)) for x in X for input in x]
+    Xstr = [list(map(partial(string_to_length, largest_in), input)) for x in X for input in x]
+    Ystr = [list(map(str, input)) for ys in y for input in y]
+    Ystr = [list(map(partial(string_to_length, largest_in), input)) for ys in y for input in ys]
+
     return Xstr, Ystr
 
 def integer_encode(X, y, alphabet):
