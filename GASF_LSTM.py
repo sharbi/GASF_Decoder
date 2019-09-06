@@ -15,11 +15,9 @@ def string_to_length(len, strin):
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
-    Xstr = [list(map(str, input)) for x in X for input in x]
-    Xtr = np.array(Xstr)
+    Xstr = [map(str, input) for x in X for input in x]
     Xstr = [map(partial(string_to_length(largest_in)), input) for x in X for input in x]
-    Ystr = [list(map(str, input)) for ys in y for input in y]
-    Ystr = np.array(Ystr)
+    Ystr = [map(str, input) for ys in y for input in y]
     Ystr = [map(partial(string_to_length(largest_out)), input) for ys in y for input in ys]
 
     return Xstr, Ystr
