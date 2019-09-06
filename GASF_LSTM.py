@@ -38,8 +38,14 @@ def convert_to_string(X, y, largest_in, largest_out):
 
 def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
-    Xenc = [char_to_int[char] for pattern in X for char in pattern]
-    Yenc = [char_to_int[char] for pattern in X for char in pattern]
+    Xenc = list()
+    for pattern in X:
+        integer_encoded = [char_to_int[char] for char in pattern]
+        Xenc.append(integer_encoded)
+    Yenc = list()
+    for pattern in y:
+        integer_encoded = [char_to_int[char] for char in pattern]
+        
     return Xenc, Yenc
 
 def one_hot_encode(X, y, max_int):
