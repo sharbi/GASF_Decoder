@@ -39,13 +39,15 @@ def convert_to_string(X, y, largest_in, largest_out):
 def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
     Xenc = list()
-    for pattern in X:
+    for i, pattern in enumerate(X):
+        progress_bar = Progbar(target=len(Y))
         integer_encoded = [char_to_int[char] for char in pattern]
         Xenc.append(integer_encoded)
+        progress_bar.update(i+1)
     Yenc = list()
     for pattern in y:
         integer_encoded = [char_to_int[char] for char in pattern]
-        
+
     return Xenc, Yenc
 
 def one_hot_encode(X, y, max_int):
