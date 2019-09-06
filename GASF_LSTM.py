@@ -15,9 +15,15 @@ def string_to_length(len, strin):
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
+    print("Input into string...")
     Xstr = [list(map(str, input)) for x in X for input in x]
     Xstr = np.array(Xstr)
+    print("Example output:")
+    print(Xstr[0])
+    print("Checking size and adding padding...")
     Xstr = [string_to_length(largest_in, str) for x in X for input in x for str in input]
+    print("Example output:")
+    print(Xstr[0])
     Ystr = [list(map(str, input)) for ys in y for input in y]
     Ystr = np.array(Ystr)
     Ystr = [string_to_length(largest_out, str) for ys in y for input in ys for str in input]
