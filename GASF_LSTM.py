@@ -15,8 +15,8 @@ def string_to_length(len, strin):
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
-    Xstr = [list(map(partial(string_to_length(largest_in), map(str, input)))) for x in X for input in x]
-    Ystr = [list(map(partial(string_to_length(largest_out), map(str, input)))) for ys in y for input in y]
+    Xstr = [list(map(partial(string_to_length(largest_in)), map(str, input))) for x in X for input in x]
+    Ystr = [list(map(partial(string_to_length(largest_out)), map(str, input))) for ys in y for input in y]
     return Xstr, Ystr
 
 def integer_encode(X, y, alphabet):
@@ -84,6 +84,8 @@ if __name__ == '__main__':
     fin = h5py.File('./data/input.h5','r')
     fout = h5py.File('./data/output.h5', 'r')
 
+    print("Loading data into array.")
+
     X_input = np.array(list(fin['input']))
     X_input = X_input.reshape(X_input.shape[0], 1, 1024)
     y = np.array(list(fout['output']))
@@ -91,9 +93,15 @@ if __name__ == '__main__':
     fin.close()
     fout.close()
 
+    print("Data loaded.")
+
+    print("Converting int to string.")
     X_input, y = convert_to_string(X_input, y, largest_input, largest_output)
+    print("Converted, encoding to index and one_hot.")
     X_input, y = integer_encode(X_input, y, alphabet)
     X_input, y = one_hot_encode(X_input, y, len(alphabet))
+
+    print("All data modification completed.")
 
     X_input, y = np.array(X_input), np.array(y)
 
