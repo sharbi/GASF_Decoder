@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import math
 import h5py
-import partial from functools
+from functools import partial
 
 
 def string_to_length(len, strin):
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
     decoder.add(TimeDistributed(Dense(12)))
 
-    decoder.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     # Load the data
     fin = h5py.File('./data/input.h5','r')
