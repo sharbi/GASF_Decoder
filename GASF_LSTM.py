@@ -17,10 +17,10 @@ def string_to_length(len, strin):
 
 def convert_to_string(X, y, largest_in, largest_out):
     print("Input into string...")
-    Xstr = [list(map(partial(string_to_length(largest_in)), input)) for x in X for input in x]
+    Xstr = [string_to_length(largest_in, number) for x in X for input in x for number in input]
     print("Example output:")
     print(Xstr[0])
-    Ystr = [list(map(partial(string_to_length(largest_out)), input)) for ys in y for input in y]
+    Ystr = [string_to_length(largest_out, number)) for ys in y for input in y for number in input]
 
     return Xstr, Ystr
 
