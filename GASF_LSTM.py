@@ -10,6 +10,7 @@ from functools import partial
 
 
 def string_to_length(max_len, strin):
+    strout = ''
     strin = str(strin)
     if len(strin) < max_len:
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
