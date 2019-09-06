@@ -6,38 +6,66 @@ import numpy as np
 import pandas as pd
 import math
 import h5py
+import partial from functools
 
-def one_hot_encode(sequence, n_unique):
-    encoding = list()
-    for value in sequence:
-        vector = [0 for _ in range(n_unique)]
-        vector[value] = 1
-        encoding.append(vector)
-    return array(encoding)
 
-def one_hot_decode(encoded_seq):
-    return [np.argmax(vector) for vector in encoded_seq]
+def string_to_length(len, strin):
+    if len(strin) < len:
+        strout = ''.join([' ' for _ in range(len - len(strin))]) + strin
+    return strout
 
-def to_supervised(seq, n_in, n_out):
-    df = pd.DataFrame(seq)
-    df = pd.concat([df.shift(n_in-i-1) for i in range(n_in)], axis=1)
+def convert_to_string(X, y, largest_in, largest_out):
+    Xstr = [list(map(partial(string_to_length(largest_in), map(str, input)))) for x in X for input in x]
+    Ystr = [list(map(partial(string_to_length(largest_out), map(str, input)))) for ys in y for input in y]
+    return Xstr, Ystr
 
-    values = df.values
-    width = seq.shape[1]
-    X = values.reshape(len(values), n_in, width)
-    y = values[:, 0:(n_out*width)].reshape(len(values), n_out, width)
-    return X, y
+def integer_encode(X, y, alphabet):
+    char_to_int = dict((c, i) for i, c in enumerate(alphabet))
+    Xenc = [char_to_int[char] for pattern in X for char in pattern]
+    Yenc = [char_to_int[char] for pattern in X for char in pattern]
+    return Xenc, Yenc
 
+def one_hot_encode(X, y, max_int):
+    Xenc = list()
+    for seq in X:
+        pattern = list()
+        for index in seq:
+            vector = [0 for _ in range(max_int)]
+            vector[index] = 1
+            pattern.append(vector)
+        Xenc.append(pattern)
+
+    Yenc = list()
+    for seq in y:
+        pattern = list()
+        for index in seq:
+            vector = [0 for _ in range(max_int)]
+            vector[index] = 1
+            pattern.append(vector)
+        Yenc.append(pattern)
+    return Xenc, Yenc
+
+# invert encoding
+def invert(seq, alphabet):
+	int_to_char = dict((i, c) for i, c in enumerate(alphabet))
+	strings = list()
+	for pattern in seq:
+		string = int_to_char[argmax(pattern)]
+		strings.append(string)
+	return ''.join(strings)
 
 if __name__ == '__main__':
 
+    alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-']
 
     # define the hyperparameters
     epochs = 200
     batch_size = 250
-    input_shape = (1, 1024)
     output_shape = (1, 60)
     latent_dim = 150
+
+    largest_input = 22
+    largest_output = 3
 
     n_in = 1024
     n_out = 60
@@ -45,14 +73,12 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, batch_input_shape=(batch_size, 1, n_in), stateful=True))
-    decoder.add(RepeatVector(1))
+    decoder.add(LSTM(latent_dim, input_shape=(22, 12), stateful=True))
+    decoder.add(RepeatVector(3))
     decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
-    decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
-    decoder.add(LSTM(latent_dim, return_sequences=True, stateful=True))
-    decoder.add(TimeDistributed(Dense(60)))
+    decoder.add(TimeDistributed(Dense(12)))
 
-    decoder.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     # Load the data
     fin = h5py.File('./data/input.h5','r')
@@ -64,6 +90,12 @@ if __name__ == '__main__':
 
     fin.close()
     fout.close()
+
+    X_input, y = convert_to_string(X_input, y, largest_input, largest_output)
+    X_input, y = integer_encode(X_input, y, alphabet)
+    X_input, y = one_hot_encode(X_input, y, len(alphabet))
+
+    X_input, y = np.array(X_input), np.array(y)
 
     training_size = math.floor(0.75 * X_input.shape[0])
 
