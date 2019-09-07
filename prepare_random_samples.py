@@ -67,7 +67,8 @@ def generate_samples(n):
 
     for _ in range(n):
 
-        X, y = list()
+        X = list()
+        y = list()
 
         print("generating random input")
         random_input = np.random.randint(1, 300, (1000 ,1, 60))
