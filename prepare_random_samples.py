@@ -59,7 +59,7 @@ def one_hot_encode(X, y, max_int):
     return Xenc, Yenc
 
 def generate_samples(n):
-    alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', ' ', 'e', '']
+    alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', ' ', 'e']
 
     for _ in range(n):
 
@@ -83,8 +83,11 @@ def generate_samples(n):
         X_gasf = X_gasf.reshape(X_gasf.shape[0], 1, 1024)
 
         X, y = convert_to_string(X_gasf, random_input, 22, 3)
+        X, y = np.array(X), np.array(y)
         X, y = integer_encode(X, y, alphabet)
+        X, y = np.array(X), np.array(y)
         X, y = one_hot_encode(X, y, len(alphabet))
+        X, y = np.array(X), np.array(y)
 
         out_directory = './data/'
         output_file = 'output.h5'
