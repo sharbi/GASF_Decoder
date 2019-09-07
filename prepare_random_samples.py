@@ -16,14 +16,12 @@ def convert_to_string(X, y, largest_in, largest_out):
     print("Example output:")
     print(Xstr[0])
     Ystr = list()
-    for i, set in enumerate(y):
-        progress_bar = Progbar(target=len(y))
+    for set in y:
         for values in set:
             patterns = list()
             for value in values:
                 patterns.append(string_to_length(largest_out, value))
             Ystr.append(patterns)
-        progress_bar.update(i + 1)
 
 
     return Xstr, Ystr
@@ -31,11 +29,9 @@ def convert_to_string(X, y, largest_in, largest_out):
 def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
     Xenc = list()
-    for i, pattern in enumerate(X):
-        progress_bar = Progbar(target=len(X))
+    for pattern in X:
         integer_encoded = [char_to_int[char] for char in pattern]
         Xenc.append(integer_encoded)
-        progress_bar.update(i+1)
     Yenc = list()
     for pattern in y:
         integer_encoded = [char_to_int[char] for char in pattern]
