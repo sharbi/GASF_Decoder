@@ -101,8 +101,7 @@ def generate_samples(n):
 
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
-        X, y = one_hot_encode(X, y, len(alphabet))
-        print(X[0])
+        #X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
 
         print(X.shape)
