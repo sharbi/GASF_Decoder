@@ -95,7 +95,7 @@ def generate_samples(n):
         print("Output shape: ")
         print(random_input.shape)
 
-        largest_int = ceil(log10(21 * 100000000000000000001))
+        largest_in = ceil(log10(21 * 100000000000000000001))
         largest_out = ceil(log10(3 * 101))
 
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
