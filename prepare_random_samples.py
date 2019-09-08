@@ -122,7 +122,7 @@ def generate_samples(n):
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
-        X_fin = np.array([1000, 1024, 22, 14])
+        X_fin = np.empty([1000, 1024, 22, 14])
         X_fin, y = np.array([np.array(x) for x in X]), np.array(y)
 
         print(X_fin.shape)
