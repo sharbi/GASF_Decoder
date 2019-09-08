@@ -74,7 +74,6 @@ def one_hot_encode(X, y, max_int):
                 vector[index] = 1
                 pattern.append(vector)
             final_in.append(pattern)
-            print(final_in[0])
         Xenc.append(final_in)
     Yenc = list()
     for patterns in y:
@@ -129,6 +128,7 @@ def generate_samples(n):
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
 
+        print(X[0])
         print(X.shape)
         print(y.shape)
 
