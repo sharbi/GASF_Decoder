@@ -131,8 +131,7 @@ def generate_samples(n):
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
-        X_fin = np.empty([1000, 1024, 22, 14])
-        X_fin, y = np.array([np.array(x) for x in X]), np.array(y)
+        X, y = np.array([np.array(x) for x in X]), np.array(y)
 
         print(X_fin.shape)
         print(y.shape)
@@ -153,12 +152,12 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + input_file):
             fin = h5py.File(out_directory + input_file, 'w')
-            dset_in = fin.create_dataset("input", data=X_fin, chunks=True, maxshape=(None, 1024, 22, 14))
+            dset_in = fin.create_dataset("input", data=X, chunks=True, maxshape=(None, 1024, 23, 14))
 
         else:
             fin = h5py.File(out_directory + input_file, 'a')
             fin['input'].resize((fin['input'].shape[0] + X.shape[0]), axis=0)
-            fin['input'][-X_gasf.shape[0]:] = X_fin
+            fin['input'][-X_gasf.shape[0]:] = X
 
 
 
