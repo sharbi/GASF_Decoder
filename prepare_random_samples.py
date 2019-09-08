@@ -65,21 +65,27 @@ def integer_encode(X, y, alphabet):
 
 def one_hot_encode(X, y, max_int):
     Xenc = list()
-    for seq in X:
-        pattern = list()
-        for index in seq:
-            vector = [0 for _ in range(max_int)]
-            vector[index] = 1
-            pattern.append(vector)
-        Xenc.append(pattern)
+    for patterns in X:
+        final_in = list()
+        for seq in patterns:
+            pattern = list()
+            for index in seq:
+                vector = [0 for _ in range(max_int)]
+                vector[index] = 1
+                pattern.append(vector)
+            final_in.append(pattern)
+        Xenc.append(final_in)
     print(Xenc[0])
     Yenc = list()
-    for seq in y:
-        pattern = list()
-        for index in seq:
-            vector = [0 for _ in range(max_int)]
-            vector[index] = 1
-            pattern.append(vector)
+    for patterns in y:
+        final_in = list()
+        for seq in patterns:
+            pattern = list()
+            for index in seq:
+                vector = [0 for _ in range(max_int)]
+                vector[index] = 1
+                pattern.append(vector)
+            final_in.append(pattern)
         Yenc.append(pattern)
     print(Yenc[0])
     return Xenc, Yenc
