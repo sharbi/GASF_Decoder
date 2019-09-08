@@ -2,6 +2,8 @@ import numpy as np
 from pyts.image import GramianAngularField
 import h5py
 import os
+from math import log10
+from math import ceil
 
 def string_to_length(max_len, strin):
     # Takes an integer and converts it to string, then ensures sequence is
