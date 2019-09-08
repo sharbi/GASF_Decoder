@@ -31,14 +31,16 @@ def convert_to_string(X, y, largest_in, largest_out):
 def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
     Xenc = list()
-    for pattern in X:
-        integer_encoded = [char_to_int[char] for char in pattern]
-        Xenc.append(integer_encoded)
+    for patterns in X:
+        for pattern in patterns:
+            integer_encoded = [char_to_int[char] for char in pattern]
+            Xenc.append(integer_encoded)
     print(Xenc[0])
     Yenc = list()
-    for pattern in y:
-        integer_encoded = [char_to_int[char] for char in pattern]
-        Yenc.append(integer_encoded)
+    for patterns in y:
+        for pattern in patterns:
+            integer_encoded = [char_to_int[char] for char in pattern]
+            Yenc.append(integer_encoded)
 
     print(Yenc[0])
 
