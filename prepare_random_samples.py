@@ -14,7 +14,7 @@ def string_to_length(max_len, strin, i):
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
     else:
         strout = strin
-    if len(strout) != 23 || != 3:
+    if len(strout) != 23 or len(strout) != 3:
         print("Error")
         print(len(strout))
         print(i)
