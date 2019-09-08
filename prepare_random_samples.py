@@ -14,7 +14,6 @@ def string_to_length(max_len, strin):
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
     else:
         strout = strin
-    print(strout)
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
