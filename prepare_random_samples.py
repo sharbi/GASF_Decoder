@@ -45,15 +45,20 @@ def convert_to_string(X, y, largest_in, largest_out):
 def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
     Xenc = list()
-    for pattern in X:
-        print(pattern)
-        integer_encoded = [char_to_int[char] for char in pattern]
-        Xenc.append(integer_encoded)
+    for patterns in X:
+        pattern_in = list()
+        for pattern in patterns:
+            integer_encoded = [char_to_int[char] for char in pattern]
+            pattern_in.append(integer_encoded)
+        Xenc.append(pattern_in)
     print(Xenc[0])
     Yenc = list()
-    for pattern in y:
-        integer_encoded = [char_to_int[char] for char in pattern]
-        Yenc.append(integer_encoded)
+    for patterns in y:
+        pattern_in = list()
+        for pattern in patterns:
+            integer_encoded = [char_to_int[char] for char in pattern]
+            pattern_in.append(integer_encoded)
+        Yenc.append(pattern_in)
 
     print(Yenc[0])
 
@@ -118,9 +123,6 @@ def generate_samples(n):
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
-
-        X = X.reshape(1000, 60, 3, 14)
-        y = y.reshape(1000, 1024, 22, 14)
 
         print(X.shape)
         print(y.shape)
