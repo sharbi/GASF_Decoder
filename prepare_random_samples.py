@@ -12,6 +12,8 @@ def string_to_length(max_len, strin):
     strin = str(strin)
     if len(strin) < max_len:
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
+    else:
+        strout = strin
     print(strout)
     return strout
 
