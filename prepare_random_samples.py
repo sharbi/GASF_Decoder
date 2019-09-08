@@ -37,7 +37,6 @@ def convert_to_string(X, y, largest_in, largest_out):
                 pattern.append(output)
             Ystr.append(pattern)
 
-    print(Ystr[0])
 
     return Xstr, Ystr
 
@@ -50,7 +49,6 @@ def integer_encode(X, y, alphabet):
             integer_encoded = [char_to_int[char] for char in pattern]
             pattern_in.append(integer_encoded)
         Xenc.append(pattern_in)
-    print(Xenc[0])
     Yenc = list()
     for patterns in y:
         pattern_in = list()
@@ -59,7 +57,6 @@ def integer_encode(X, y, alphabet):
             pattern_in.append(integer_encoded)
         Yenc.append(pattern_in)
 
-    print(Yenc[0])
 
     return Xenc, Yenc
 
@@ -125,9 +122,9 @@ def generate_samples(n):
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
+        X_fin = np.array([1000, 1024, 22, 14])
         X_fin, y = np.array([np.array(x) for x in X]), np.array(y)
 
-        print(X_fin[0])
         print(X_fin.shape)
         print(y.shape)
 
