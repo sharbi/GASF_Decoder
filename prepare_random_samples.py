@@ -5,7 +5,7 @@ import os
 from math import log10
 from math import ceil
 
-def string_to_length(max_len, strin):
+def string_to_length(max_len, strin, i):
     # Takes an integer and converts it to string, then ensures sequence is
     # the same length with padding from spaces
     strout = ''
@@ -16,6 +16,8 @@ def string_to_length(max_len, strin):
         strout = strin
     if len(strout) != 22:
         print("Error")
+        print(len(strout))
+        print(i)
         quit()
     return strout
 
@@ -26,8 +28,8 @@ def convert_to_string(X, y, largest_in, largest_out):
     for x in X:
         for input in x:
             pattern = list()
-            for number in input:
-                output = string_to_length(largest_in, number)
+            for i, number in enumerate(input):
+                output = string_to_length(largest_in, number, i)
                 pattern.append(output)
             Xstr.append(pattern)
     print("Example output:")
@@ -35,8 +37,8 @@ def convert_to_string(X, y, largest_in, largest_out):
     for ys in y:
         for input in ys:
             pattern = list()
-            for number in input:
-                output = string_to_length(largest_out, number)
+            for i, number in enumerate(input):
+                output = string_to_length(largest_out, number, i)
                 pattern.append(output)
             Ystr.append(pattern)
 
