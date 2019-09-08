@@ -14,7 +14,7 @@ def string_to_length(max_len, strin, i):
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
     else:
         strout = strin
-    if len(strout) != 24 || != 3:
+    if len(strout) != 23 || != 3:
         print("Error")
         print(len(strout))
         print(i)
@@ -125,7 +125,7 @@ def generate_samples(n):
         print("Output shape: ")
         print(random_input.shape)
 
-        largest_in = ceil(log10(23 * 10000000000000000000001))
+        largest_in = ceil(log10(22 * 1000000000000000000001))
         largest_out = ceil(log10(3 * 101))
 
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
