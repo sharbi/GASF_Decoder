@@ -36,6 +36,8 @@ def integer_encode(X, y, alphabet):
         integer_encoded = [char_to_int[char] for char in pattern]
         Yenc.append(integer_encoded)
 
+    print(Yenc[0])
+
     return Xenc, Yenc
 
 def one_hot_encode(X, y, max_int):
@@ -56,6 +58,7 @@ def one_hot_encode(X, y, max_int):
             vector[index] = 1
             pattern.append(vector)
         Yenc.append(pattern)
+    print(Yenc[0])
     return Xenc, Yenc
 
 def generate_samples(n):
