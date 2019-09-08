@@ -28,7 +28,6 @@ def convert_to_string(X, y, largest_in, largest_out):
                 pattern.append(output)
             Xstr.append(pattern)
     print("Example output:")
-    print(Xstr[0])
     Ystr = list()
     for ys in y:
         for input in x:
@@ -36,7 +35,7 @@ def convert_to_string(X, y, largest_in, largest_out):
             for number in input:
                 output = string_to_length(largest_out, number)
                 pattern.append(output)
-            Xstr.append(pattern)
+            Ystr.append(pattern)
 
     print(Ystr[0])
 
