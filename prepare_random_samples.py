@@ -4,6 +4,8 @@ import h5py
 import os
 
 def string_to_length(max_len, strin):
+    # Takes an integer and converts it to string, then ensures sequence is
+    # the same length with padding from spaces
     strout = ''
     strin = str(strin)
     if len(strin) < max_len:
@@ -11,6 +13,7 @@ def string_to_length(max_len, strin):
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
+    # Applies the string conversion to all the input and output values
     print("Input into string...")
     Xstr = [string_to_length(largest_in, number) for x in X for input in x for number in input]
     print("Example output:")
@@ -23,6 +26,7 @@ def convert_to_string(X, y, largest_in, largest_out):
                 patterns.append(string_to_length(largest_out, value))
             Ystr.append(patterns)
 
+    print(Ystr[0])
 
     return Xstr, Ystr
 
@@ -83,6 +87,10 @@ def generate_samples(n):
         print("Finished GASF")
 
         X_gasf = X_gasf.reshape(X_gasf.shape[0], 1, 1024)
+
+        print("Check array shapes:")
+        print("Input shape: " + X_gasf.shape)
+        print("Output shape: " + random_input.shape)
 
         X, y = convert_to_string(X_gasf, random_input, 22, 3)
         X, y = integer_encode(X, y, alphabet)
