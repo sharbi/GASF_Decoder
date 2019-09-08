@@ -89,8 +89,10 @@ def generate_samples(n):
         X_gasf = X_gasf.reshape(X_gasf.shape[0], 1, 1024)
 
         print("Check array shapes:")
-        print("Input shape: " + X_gasf.shape)
-        print("Output shape: " + random_input.shape)
+        print("Input shape: ")
+        print(X_gasf.shape)
+        print("Output shape: ")
+        print(random_input.shape)
 
         X, y = convert_to_string(X_gasf, random_input, 22, 3)
         X, y = integer_encode(X, y, alphabet)
