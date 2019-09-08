@@ -32,15 +32,19 @@ def integer_encode(X, y, alphabet):
     char_to_int = dict((c, i) for i, c in enumerate(alphabet))
     Xenc = list()
     for patterns in X:
+        pattern_in = list()
         for pattern in patterns:
             integer_encoded = [char_to_int[char] for char in pattern]
-            Xenc.append(integer_encoded)
+            pattern_in.append(integer_encoded)
+        Xenc.append(pattern_in)
     print(Xenc[0])
     Yenc = list()
     for patterns in y:
+        pattern_in = list()
         for pattern in patterns:
             integer_encoded = [char_to_int[char] for char in pattern]
-            Yenc.append(integer_encoded)
+            pattern_in.append(integer_encoded)
+        Yenc.append(pattern_in)
 
     print(Yenc[0])
 
