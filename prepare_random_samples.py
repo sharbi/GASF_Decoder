@@ -90,13 +90,16 @@ def generate_samples(n):
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
 
+        print(X.shape)
+        print(y.shape)
+
         out_directory = './data/'
         output_file = 'output.h5'
         input_file = 'input.h5'
 
         if not os.path.exists(out_directory + output_file):
             fout = h5py.File(out_directory + output_file, 'w')
-            dset_out = fout.create_dataset("output", data=y, chunks=True, maxshape=(None, 1, 60))
+            dset_out = fout.create_dataset("output", data=y, chunks=True, maxshape=(None, 1, 60, 14))
 
         else:
             fout = h5py.File(out_directory + output_file, 'a')
@@ -106,7 +109,7 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + input_file):
             fin = h5py.File(out_directory + input_file, 'w')
-            dset_in = fin.create_dataset("input", data=X, chunks=True, maxshape=(None, 1, 32, 32))
+            dset_in = fin.create_dataset("input", data=X, chunks=True, maxshape=(None, 1, 1024, 14))
 
         else:
             fin = h5py.File(out_directory + input_file, 'a')
