@@ -71,7 +71,7 @@ def one_hot_encode(X, y, max_int):
                 vector[index] = 1
                 pattern.append(vector)
             final_in.append(pattern)
-            print(len(final_in))
+        print(len(final_in))
         Xenc.append(final_in)
     Yenc = list()
     for patterns in y:
