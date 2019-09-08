@@ -64,7 +64,7 @@ def one_hot_encode(X, y, max_int):
     Xenc = list()
     for patterns in X:
         final_in = list()
-        for seq in patterns:
+        for i, seq in enumerate(patterns):
             pattern = list()
             for index in seq:
                 vector = [0 for _ in range(max_int)]
@@ -72,6 +72,7 @@ def one_hot_encode(X, y, max_int):
                 pattern.append(vector)
             if len(pattern) != 22:
                 print("ERROR")
+                print(i)
                 quit()
             final_in.append(pattern)
         Xenc.append(final_in)
