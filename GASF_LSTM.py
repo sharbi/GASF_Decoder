@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(1024, 23, 14)))
+    decoder.add(LSTM(latent_dim, input_shape=(1, 1024, 23, 14)))
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(14)))
@@ -86,7 +86,6 @@ if __name__ == '__main__':
                 epochs=1,
                 verbose=1,
                 validation_data=(X_test, y_test))
-        decoder.reset_states()
 
     score = decoder.evaluate(X_test, y_test, verbose=0)
     print("Test loss:", score[0])
