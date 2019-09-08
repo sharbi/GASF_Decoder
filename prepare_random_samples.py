@@ -18,13 +18,7 @@ def convert_to_string(X, y, largest_in, largest_out):
     Xstr = [string_to_length(largest_in, number) for x in X for input in x for number in input]
     print("Example output:")
     print(Xstr[0])
-    Ystr = list()
-    for set in y:
-        for values in set:
-            patterns = list()
-            for value in values:
-                patterns.append(string_to_length(largest_out, value))
-            Ystr.append(patterns)
+    Ystr = [string_to_length(largest_out, number) for ys in y for input in ys for number in input]
 
     print(Ystr[0])
 
