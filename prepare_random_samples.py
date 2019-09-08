@@ -133,7 +133,7 @@ def generate_samples(n):
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array([np.array(x) for x in X]), np.array(y)
 
-        print(X_fin.shape)
+        print(X.shape)
         print(y.shape)
 
         out_directory = './data/'
