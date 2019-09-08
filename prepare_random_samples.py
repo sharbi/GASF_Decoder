@@ -93,7 +93,10 @@ def generate_samples(n):
         print("Output shape: ")
         print(random_input.shape)
 
-        X, y = convert_to_string(X_gasf, random_input, 22, 3)
+        largest_int = ceil(log10(21 * 100000000000000000001))
+        largest_out = ceil(log10(3 * 101))
+
+        X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
