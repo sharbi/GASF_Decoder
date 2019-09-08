@@ -70,6 +70,7 @@ def generate_samples(n):
         random_input = np.random.randint(1, 300, (1000 ,1, 60))
         print("Input generated")
 
+        print(random_input[0])
 
         image_size = 32
         print("Performing GASF on input")
