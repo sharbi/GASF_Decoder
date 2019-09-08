@@ -32,6 +32,7 @@ def integer_encode(X, y, alphabet):
     for pattern in X:
         integer_encoded = [char_to_int[char] for char in pattern]
         Xenc.append(integer_encoded)
+    print(Xenc[0])
     Yenc = list()
     for patterns in y:
         for pattern in patterns:
@@ -48,7 +49,7 @@ def one_hot_encode(X, y, max_int):
             vector[index] = 1
             pattern.append(vector)
         Xenc.append(pattern)
-
+    print(Xenc[0])
     Yenc = list()
     for seq in y:
         pattern = list()
@@ -84,9 +85,7 @@ def generate_samples(n):
         X_gasf = X_gasf.reshape(X_gasf.shape[0], 1, 1024)
 
         X, y = convert_to_string(X_gasf, random_input, 22, 3)
-        X, y = np.array(X), np.array(y)
         X, y = integer_encode(X, y, alphabet)
-        X, y = np.array(X), np.array(y)
         X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array(X), np.array(y)
 
