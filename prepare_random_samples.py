@@ -75,19 +75,19 @@ def one_hot_encode(X, y, max_int):
                 pattern.append(vector)
             final_in.append(pattern)
         Xenc.append(final_in)
-    print(Xenc[0])
+    print(Xenc[0][0][0])
     Yenc = list()
     for patterns in y:
-        final_in = list()
+        final_out = list()
         for seq in patterns:
             pattern = list()
             for index in seq:
                 vector = [0 for _ in range(max_int)]
                 vector[index] = 1
                 pattern.append(vector)
-            final_in.append(pattern)
-        Yenc.append(final_in)
-    print(Yenc[0])
+            final_out.append(pattern)
+        Yenc.append(final_out)
+    print(Yenc[0][0][0])
     return Xenc, Yenc
 
 def generate_samples(n):
