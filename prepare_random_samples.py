@@ -30,7 +30,7 @@ def convert_to_string(X, y, largest_in, largest_out):
     print("Example output:")
     Ystr = list()
     for ys in y:
-        for input in x:
+        for input in ys:
             pattern = list()
             for number in input:
                 output = string_to_length(largest_out, number)
