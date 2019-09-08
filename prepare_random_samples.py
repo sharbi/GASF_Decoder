@@ -37,7 +37,6 @@ def convert_to_string(X, y, largest_in, largest_out):
                 pattern.append(output)
             Ystr.append(pattern)
 
-    print(Ystr[0])
 
     return Xstr, Ystr
 
@@ -50,7 +49,6 @@ def integer_encode(X, y, alphabet):
             integer_encoded = [char_to_int[char] for char in pattern]
             pattern_in.append(integer_encoded)
         Xenc.append(pattern_in)
-    print(Xenc[0])
     Yenc = list()
     for patterns in y:
         pattern_in = list()
@@ -59,7 +57,6 @@ def integer_encode(X, y, alphabet):
             pattern_in.append(integer_encoded)
         Yenc.append(pattern_in)
 
-    print(Yenc[0])
 
     return Xenc, Yenc
 
@@ -75,7 +72,6 @@ def one_hot_encode(X, y, max_int):
                 pattern.append(vector)
             final_in.append(pattern)
         Xenc.append(final_in)
-    print(Xenc[0])
     Yenc = list()
     for patterns in y:
         final_in = list()
@@ -87,7 +83,6 @@ def one_hot_encode(X, y, max_int):
                 pattern.append(vector)
             final_in.append(pattern)
         Yenc.append(pattern)
-    print(Yenc[0])
     return Xenc, Yenc
 
 def generate_samples(n):
