@@ -86,7 +86,6 @@ def one_hot_encode(X, y, max_int):
                 pattern.append(vector)
             final_out.append(pattern)
         Yenc.append(final_out)
-    print(Yenc[0][0][0])
     return Xenc, Yenc
 
 def generate_samples(n):
@@ -126,7 +125,7 @@ def generate_samples(n):
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
         X, y = one_hot_encode(X, y, len(alphabet))
-        X, y = np.array(X), np.array(y)
+        X, y = np.array([np.array(x) for x in X), np.array(y)
 
         print(X[0])
         print(X.shape)
