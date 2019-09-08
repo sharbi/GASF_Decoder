@@ -32,9 +32,9 @@ def integer_encode(X, y, alphabet):
         Xenc.append(integer_encoded)
     print(Xenc[0])
     Yenc = list()
-    for patterns in y:
-        for pattern in patterns:
-            integer_encoded = [char_to_int[char] for char in pattern]
+    for pattern in y:
+        integer_encoded = [char_to_int[char] for char in pattern]
+        Yenc.append(integer_encoded)
 
     return Xenc, Yenc
 
