@@ -6,11 +6,11 @@ import os
 def string_to_length(max_len, strin):
     # Takes an integer and converts it to string, then ensures sequence is
     # the same length with padding from spaces
-    print(strin)
     strout = ''
     strin = str(strin)
     if len(strin) < max_len:
         strout = ''.join([' ' for _ in range(max_len - len(strin))]) + strin
+    print(strout)
     return strout
 
 def convert_to_string(X, y, largest_in, largest_out):
