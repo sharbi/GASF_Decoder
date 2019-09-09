@@ -29,6 +29,7 @@ if __name__ == '__main__':
     # define the hyperparameters
     epochs = 200
     batch_size = 10
+    latent_dim = 150
     output_shape = (1, 60)
 
     largest_input = 22
