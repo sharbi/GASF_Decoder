@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 23, 14)))
+    decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 1, 23, 14)))
     decoder.add(RepeatVector(60))
     decoder.add(ConvLSTM2D(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(14)))
