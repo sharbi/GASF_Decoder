@@ -103,7 +103,7 @@ if __name__ == '__main__':
                 verbose=1,
                 validation_data=(X_test, y_test))
         results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
-        expected = [invert(x, alphabet) for x in y]
+        expected = [invert(x, alphabet) for ys in y for x in ys]
         predicted = [invert(x, alphabet) for result in results for x in result]
         print("Predicted:", predicted[0])
         print("Actual", expected[0])
