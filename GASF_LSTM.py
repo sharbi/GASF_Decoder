@@ -56,7 +56,7 @@ if __name__ == '__main__':
     decoder.add(TimeDistributed(Dense(42, activation='relu')))
     decoder.add(Reshape((60, 3, 14)))
 
-    decoder.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     print(decoder.summary())
 
     # Load the data
