@@ -46,8 +46,7 @@ if __name__ == '__main__':
     #decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
     #decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
     #decoder.add(Reshape((60, 1, 3, 14)))
-    decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
-    decoder.add(RepeatVector(60))
+    decoder.add(LSTM(latent_dim, input_shape=(1024, 23), return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(3, activation='relu')))
 
