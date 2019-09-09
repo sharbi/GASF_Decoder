@@ -45,7 +45,6 @@ if __name__ == '__main__':
     decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
     decoder.add(AveragePooling3D((1, 3, 14)))
     decoder.add(Reshape((-1, 60)))
-    decoder.add(TimeDistributed(Dense(14)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
