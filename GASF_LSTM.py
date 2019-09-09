@@ -1,6 +1,6 @@
 import tensorflow as tf
 import keras.backend as K
-from keras.layers import Input, Dense, LSTM, Reshape, TimeDistributed, RepeatVector
+from keras.layers import Input, Dense, ConvLSTM2D, LSTM, Reshape, TimeDistributed, RepeatVector
 from keras.models import Sequential
 import numpy as np
 import pandas as pd
@@ -40,9 +40,9 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(LSTM(latent_dim, input_shape=(23, 14)))
+    decoder.add(ConvLSTM2D(latent_dim, input_shape=(23, 14)))
     decoder.add(RepeatVector(60))
-    decoder.add(LSTM(latent_dim, return_sequences=True))
+    decoder.add(ConvLSTM2D(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(14)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
