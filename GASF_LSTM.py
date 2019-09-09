@@ -22,7 +22,7 @@ def invert(seq, alphabet):
             print("Error! Key out of range")
             print(np.argmax(pattern))
             quit()
-        string = int_to_char[np.argmax(pattern)]
+        string = int_to_char[pattern]
         strings.append(string)
     return ''.join(strings)
 
@@ -50,11 +50,10 @@ if __name__ == '__main__':
     #decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
     #decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
     #decoder.add(Reshape((60, 1, 3, 14)))
-    decoder.add(LSTM(latent_dim, input_shape=(1024, 322)))
+    decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
-    decoder.add(TimeDistributed(Dense(42, activation='relu')))
-    decoder.add(Reshape((60, 3, 14)))
+    decoder.add(TimeDistributed(Dense(3, activation='relu')))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     print(decoder.summary())
@@ -68,7 +67,6 @@ if __name__ == '__main__':
     X_input = np.array(list(fin['input']))
     y = np.array(list(fout['output']))
 
-    X_input = X_input.reshape(X_input.shape[0], 1024, 322)
 
     fin.close()
     fout.close()
@@ -101,7 +99,7 @@ if __name__ == '__main__':
                 verbose=1,
                 validation_data=(X_test, y_test))
         results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
-        expected = [invert(x, alphabet) for ys in y_test for x in ys]
-        predicted = [invert(x, alphabet) for result in results for x in result]
+        expected = [[invert(x, alphabet) for ys in y_test] for x in ys]
+        predicted = [[invert(x, alphabet) for result in results] for x in result]
         print("Predicted:", predicted[0])
         print("Actual", expected[0])
