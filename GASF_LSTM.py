@@ -46,9 +46,9 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
-    decoder.add(TimeDistributed(Dense(3)))
+    decoder.add(TimeDistributed(Dense(3, activation='softmax')))
 
-    decoder.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     # Load the data
     fin = h5py.File('./data/input.h5','r')
