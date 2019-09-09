@@ -18,7 +18,7 @@ def invert(seq, alphabet):
     int_to_char = dict((i, c) for i, c in enumerate(alphabet))
     strings = list()
     for pattern in seq:
-        string = int_to_char[round(pattern, 0)]
+        string = int_to_char[math.floor(round(pattern, 0))]
         strings.append(string)
     return ''.join(strings)
 
