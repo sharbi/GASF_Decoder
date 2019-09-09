@@ -83,7 +83,7 @@ if __name__ == '__main__':
     num_batches = num_train // batch_size
     epoch_decoder_loss = []
 
-    for epoch in epochs:
+    for epoch in range(epochs):
         decoder.fit(X_train, y_train,
                 batch_size=batch_size,
                 epochs=1,
