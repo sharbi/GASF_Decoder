@@ -89,6 +89,6 @@ if __name__ == '__main__':
                 epochs=1,
                 verbose=1,
                 validation_data=(X_test, y_test))
-        score = decoder.evaluate(X_test, y_test, verbose=0)
-        print("Test loss:", score[0])
-        print("Test accuracy", score[1])
+        predicted = decoder.predict(X_test, batch_size=batch_size, verbose=0)
+        print("Predicted:", predicted[0])
+        print("Actual", y_test[0])
