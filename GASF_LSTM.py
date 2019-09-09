@@ -98,7 +98,7 @@ if __name__ == '__main__':
                 epochs=1,
                 verbose=1,
                 validation_data=(X_test, y_test))
-        results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
+        result = decoder.predict(X_test, batch_size=batch_size, verbose=0)
         expected = [invert(x, alphabet) for x in y]
         predicted = [invert(x, alphabet) for x in result]
         print("Predicted:", predicted[0])
