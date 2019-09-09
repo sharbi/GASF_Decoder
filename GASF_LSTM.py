@@ -19,6 +19,10 @@ def invert(seq, alphabet):
     int_to_char = dict((i, c) for i, c in enumerate(alphabet))
     strings = list()
     for pattern in seq:
+        if np.argmax(pattern) > 14:
+            print("Error! Key out of range")
+            print(np.argmax(pattern))
+            quit()
         string = int_to_char[np.argmax(pattern)]
         strings.append(string)
     return ''.join(strings)
@@ -102,4 +106,4 @@ if __name__ == '__main__':
         expected = [invert(x, alphabet) for x in y]
         predicted = [invert(x, alphabet) for result in results for x in result]
         print("Predicted:", predicted[0])
-        print("Actual", y_test[0])
+        print("Actual", expected[0])
