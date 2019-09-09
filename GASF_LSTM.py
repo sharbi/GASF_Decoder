@@ -43,7 +43,6 @@ if __name__ == '__main__':
     decoder = Sequential()
     decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
     decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
-    decoder.add(AveragePooling3D((1, 3, 14)))
 
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
