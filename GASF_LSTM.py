@@ -50,7 +50,7 @@ if __name__ == '__main__':
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
-    decoder.add(TimeDistributed(Dense(3, activation='relu')))
+    decoder.add(TimeDistributed(Dense(3)))
 
     decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
     print(decoder.summary())
