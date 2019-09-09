@@ -55,7 +55,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(3, activation='relu')))
 
-    decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    decoder.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
     print(decoder.summary())
 
     # Load the data
