@@ -39,6 +39,8 @@ if __name__ == '__main__':
     n_out = 60
 
 
+    alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', ' ', 'e']
+
     # define the model
     decoder = Sequential()
     #decoder.add(ConvLSTM2D(50, (11, 1), input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
@@ -96,6 +98,8 @@ if __name__ == '__main__':
                 epochs=1,
                 verbose=1,
                 validation_data=(X_test, y_test))
-        predicted = decoder.predict(X_test, batch_size=batch_size, verbose=0)
+        results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
+        expected = [invert(x, alphabet) for ys in y for x in ys]
+        predicted = [invert(x, alphabet) for result in results for x in result]
         print("Predicted:", predicted[0])
         print("Actual", y_test[0])
