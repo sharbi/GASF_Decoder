@@ -48,7 +48,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(3)))
 
-    decoder.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
+    decoder.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
     # Load the data
     fin = h5py.File('./data/input.h5','r')
