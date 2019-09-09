@@ -44,9 +44,9 @@ if __name__ == '__main__':
     #decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
     #decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
     decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
-    decoder.add(RepeatVector(3))
+    decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
-    decoder.add(TimeDistributed(Dense(60)))
+    decoder.add(TimeDistributed(Dense(3)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
