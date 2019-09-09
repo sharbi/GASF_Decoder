@@ -18,7 +18,6 @@ def invert(seq, alphabet):
     int_to_char = dict((i, c) for i, c in enumerate(alphabet))
     strings = list()
     for pattern in seq:
-        print(pattern)
         string = int_to_char[pattern]
         strings.append(string)
     return ''.join(strings)
