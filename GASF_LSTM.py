@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     # define the hyperparameters
     epochs = 200
-    batch_size = 100
+    batch_size = 250
     latent_dim = 150
     output_shape = (1, 60)
 
@@ -99,8 +99,8 @@ if __name__ == '__main__':
                 epochs=1,
                 verbose=1,
                 validation_data=(X_test, y_test))
-        result = decoder.predict(X_test, batch_size=batch_size, verbose=0)
+        results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
         expected = [invert(x, alphabet) for x in y]
-        predicted = [invert(x, alphabet) for x in result]
+        predicted = [invert(x, alphabet) for result in results for x in result]
         print("Predicted:", predicted[0])
         print("Actual", y_test[0])
