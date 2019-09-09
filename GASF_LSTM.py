@@ -40,15 +40,15 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(ConvLSTM2D(50, (11, 1), input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
-    decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
-    decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
-    decoder.add(Reshape((60, 1, 3, 14)))
-    #decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
-    #decoder.add(RepeatVector(60))
-    #decoder.add(LSTM(latent_dim, return_sequences=True))
-    #decoder.add(LSTM(latent_dim, return_sequences=True))
-    #decoder.add(TimeDistributed(Dense(3, activation='relu')))
+    #decoder.add(ConvLSTM2D(50, (11, 1), input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
+    #decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
+    #decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
+    #decoder.add(Reshape((60, 1, 3, 14)))
+    decoder.add(LSTM(latent_dim, input_shape=(1024, 322)))
+    decoder.add(RepeatVector(60))
+    decoder.add(LSTM(latent_dim, return_sequences=True))
+    decoder.add(LSTM(latent_dim, return_sequences=True))
+    decoder.add(TimeDistributed(Dense(14, activation='relu')))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     print(decoder.summary())
@@ -61,6 +61,8 @@ if __name__ == '__main__':
 
     X_input = np.array(list(fin['input']))
     y = np.array(list(fout['output']))
+
+    X_input = X_input.reshape(X_input.shape[0], 1024, 322)
 
     fin.close()
     fout.close()
