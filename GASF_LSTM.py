@@ -97,5 +97,6 @@ if __name__ == '__main__':
         results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
         expected = [invert(x, alphabet) for ys in y_test for x in ys]
         predicted = [invert(x, alphabet) for result in results for x in result]
-        print("Predicted:", predicted[0])
-        print("Actual", expected[0])
+        for i in range(20):
+            print("Predicted:", predicted[i])
+            print("Actual", expected[i])
