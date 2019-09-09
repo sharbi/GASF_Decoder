@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     # define the hyperparameters
     epochs = 200
-    batch_size = 250
+    batch_size = 20
     output_shape = (1, 60)
     latent_dim = 150
 
@@ -45,6 +45,7 @@ if __name__ == '__main__':
     #decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
     decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
     decoder.add(RepeatVector(60))
+    decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(3, activation='relu')))
 
