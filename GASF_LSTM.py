@@ -22,7 +22,7 @@ def invert(seq, alphabet):
         print(len(pattern))
         string = int_to_char[np.argmax(pattern)]
         strings.append(string)
-	return ''.join(strings)
+    return ''.join(strings)
 
 if __name__ == '__main__':
 
