@@ -18,10 +18,7 @@ def invert(seq, alphabet):
     int_to_char = dict((i, c) for i, c in enumerate(alphabet))
     strings = list()
     for pattern in seq:
-        if np.argmax(pattern) > 14:
-            print("Error! Key out of range")
-            print(np.argmax(pattern))
-            quit()
+        print(pattern)
         string = int_to_char[pattern]
         strings.append(string)
     return ''.join(strings)
