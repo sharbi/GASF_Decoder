@@ -41,9 +41,12 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
-    decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
-
+    #decoder.add(ConvLSTM2D(latent_dim, 2, input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
+    #decoder.add(ConvLSTM2D(latent_dim, 2, return_sequences=True))
+    decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
+    decoder.add(RepeatVector(3))
+    decoder.add(LSTM(latent_dim, return_sequences=True))
+    decoder.add(TimeDistributed(Dense(60)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -61,8 +64,8 @@ if __name__ == '__main__':
 
     print("Data loaded.")
 
-    X_input = X_input.reshape((X_input.shape[0], X_input.shape[1], 1, X_input.shape[2], X_input.shape[3]))
-    y = y.reshape((y.shape[0], y.shape[1], 1, y.shape[2], y.shape[3]))
+    #X_input = X_input.reshape((X_input.shape[0], X_input.shape[1], 1, X_input.shape[2], X_input.shape[3]))
+    #y = y.reshape((y.shape[0], y.shape[1], 1, y.shape[2], y.shape[3]))
 
     training_size = math.floor(0.75 * X_input.shape[0])
 
