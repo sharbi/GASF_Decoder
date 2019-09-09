@@ -130,7 +130,7 @@ def generate_samples(n):
 
         X, y = convert_to_string(X_gasf, random_input, largest_in, largest_out)
         X, y = integer_encode(X, y, alphabet)
-        X, y = one_hot_encode(X, y, len(alphabet))
+        #X, y = one_hot_encode(X, y, len(alphabet))
         X, y = np.array([np.array(x) for x in X]), np.array(y)
 
         print(X.shape)
@@ -142,7 +142,7 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + output_file):
             fout = h5py.File(out_directory + output_file, 'w')
-            dset_out = fout.create_dataset("output", data=y, chunks=True, maxshape=(None, 60, 3, 14))
+            dset_out = fout.create_dataset("output", data=y, chunks=True, maxshape=(None, 60, 3))
 
         else:
             fout = h5py.File(out_directory + output_file, 'a')
@@ -152,7 +152,7 @@ def generate_samples(n):
 
         if not os.path.exists(out_directory + input_file):
             fin = h5py.File(out_directory + input_file, 'w')
-            dset_in = fin.create_dataset("input", data=X, chunks=True, maxshape=(None, 1024, 23, 14))
+            dset_in = fin.create_dataset("input", data=X, chunks=True, maxshape=(None, 1024, 23))
 
         else:
             fin = h5py.File(out_directory + input_file, 'a')
