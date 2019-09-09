@@ -80,12 +80,11 @@ if __name__ == '__main__':
 
 
 
-    for epoch in range(epochs):
-        decoder.fit(X_train, y_train,
-                batch_size=batch_size,
-                epochs=1,
-                verbose=1,
-                validation_data=(X_test, y_test))
+    decoder.fit(X_train, y_train,
+            batch_size=batch_size,
+            epochs=epochs,
+            verbose=1,
+            validation_data=(X_test, y_test))
 
     score = decoder.evaluate(X_test, y_test, verbose=0)
     print("Test loss:", score[0])
