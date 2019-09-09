@@ -19,7 +19,7 @@ def invert(seq, alphabet):
 	int_to_char = dict((i, c) for i, c in enumerate(alphabet))
 	strings = list()
 	for pattern in seq:
-		string = int_to_char[argmax(pattern)]
+		string = int_to_char[np.argmax(pattern)]
 		strings.append(string)
 	return ''.join(strings)
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
                 verbose=1,
                 validation_data=(X_test, y_test))
         results = decoder.predict(X_test, batch_size=batch_size, verbose=0)
-        expected = [invert(x, alphabet) for ys in y for x in ys]
-        predicted = [invert(x, alphabet) for result in results for x in result]
+        expected = [invert(x, alphabet) for x in y]
+        predicted = [invert(x, alphabet) for x in result]
         print("Predicted:", predicted[0])
         print("Actual", y_test[0])
