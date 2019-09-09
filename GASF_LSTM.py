@@ -50,7 +50,7 @@ if __name__ == '__main__':
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(42, activation='relu')))
-    decoder.add(Reshape(60, 3, 14))
+    decoder.add(Reshape((60, 3, 14)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     print(decoder.summary())
