@@ -16,12 +16,12 @@ from keras.utils.generic_utils import Progbar
 
 # invert encoding
 def invert(seq, alphabet):
-	int_to_char = dict((i, c) for i, c in enumerate(alphabet))
-	strings = list()
-	for pattern in seq:
+    int_to_char = dict((i, c) for i, c in enumerate(alphabet))
+    strings = list()
+    for pattern in seq:
         print(len(pattern))
-		string = int_to_char[np.argmax(pattern)]
-		strings.append(string)
+        string = int_to_char[np.argmax(pattern)]
+        strings.append(string)
 	return ''.join(strings)
 
 if __name__ == '__main__':
