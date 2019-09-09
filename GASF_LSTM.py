@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     # define the model
     decoder = Sequential()
-    decoder.add(ConvLSTM2D(100, (11, 1), input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
+    decoder.add(ConvLSTM2D(50, (11, 1), input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
     decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
     decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
     decoder.add(Reshape((60, 1, 3, 14)))
