@@ -42,8 +42,8 @@ if __name__ == '__main__':
     # define the model
     decoder = Sequential()
     decoder.add(ConvLSTM2D(latent_dim, 3, input_shape=(1024, 1, 23, 14), data_format='channels_first', return_sequences=True))
-    decoder.add(ConvLSTM2D(latent_dim, 3, return_sequences=True))
-    decoder.add(ConvLSTM2D(1, 3, return_sequences=True))
+    decoder.add(ConvLSTM2D(latent_dim, 3, return_sequences=True, data_format='channels_first'))
+    decoder.add(ConvLSTM2D(1, 3, return_sequences=True, data_format='channels_first'))
     #decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
     #decoder.add(RepeatVector(60))
     #decoder.add(LSTM(latent_dim, return_sequences=True))
