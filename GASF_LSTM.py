@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # define the hyperparameters
     epochs = 200
     batch_size = 250
-    latent_dim = 250
+    latent_dim = 50
     output_shape = (1, 60)
 
     largest_input = 22
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     #decoder.add(ConvLSTM2D(50, (11, 1), return_sequences=True, data_format='channels_first'))
     #decoder.add(ConvLSTM2D(60, 1, data_format='channels_first', activation='softmax'))
     #decoder.add(Reshape((60, 1, 3, 14)))
-    decoder.add(LSTM(latent_dim, input_shape=(1024, 23)))
+    decoder.add(LSTM(latent_dim, input_shape=(1024, 322)))
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(3, activation='softmax')))
@@ -68,6 +68,8 @@ if __name__ == '__main__':
     fout.close()
 
     print("Data loaded.")
+
+    X_input.reshape((X_input.shape[0], 322))
 
     #X_input = X_input.reshape((X_input.shape[0], X_input.shape[1], 1, X_input.shape[2], X_input.shape[3]))
     #y = y.reshape((y.shape[0], y.shape[1], 1, y.shape[2], y.shape[3]))
