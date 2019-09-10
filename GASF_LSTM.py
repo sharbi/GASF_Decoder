@@ -54,7 +54,7 @@ if __name__ == '__main__':
     decoder.add(RepeatVector(60))
     decoder.add(LSTM(latent_dim, return_sequences=True))
     decoder.add(TimeDistributed(Dense(42, activation='softmax')))
-    decoder.add(Reshape((None, 60, 3, 42)))
+    decoder.add(Reshape((60, 3, 42)))
 
     decoder.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     print(decoder.summary())
